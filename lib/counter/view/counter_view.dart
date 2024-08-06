@@ -9,6 +9,11 @@ class CounterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      appBar: AppBar(
+        elevation: 5,
+        title: const Text('Flutter Counter'),
+        centerTitle: true,
+      ),
       body: Center(
         child: BlocBuilder<CounterBloc, CounterState>(
           builder: (context, state) {
