@@ -27,12 +27,15 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
   }
 
   void _decrement(Decrement event, Emitter<CounterState> emit) async {
-    currentCounter = state.counterValue - 1;
-    await _firestore
-        .collection(collectionName)
-        .doc(docId)
-        .set({'value': currentCounter});
-    emit(CounterState(counterValue: currentCounter));
+    if (state.counterValue > 0) {
+      currentCounter = state.counterValue - 1;
+      await _firestore
+          .collection(collectionName)
+          .doc(docId)
+          .set({'value': currentCounter});
+
+      emit(CounterState(counterValue: currentCounter));
+    }
   }
 
   Future<void> _initializeCounter() async {
