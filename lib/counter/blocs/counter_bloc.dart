@@ -18,7 +18,7 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
 
   void _increment(Increment event, Emitter<CounterState> emit) async {
     currentCounter = state.counterValue + 1;
-    _firestore
+    await _firestore
         .collection(collectionName)
         .doc(docId)
         .set({'value': currentCounter});
@@ -27,7 +27,7 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
 
   void _decrement(Decrement event, Emitter<CounterState> emit) async {
     currentCounter = state.counterValue - 1;
-    _firestore
+    await _firestore
         .collection(collectionName)
         .doc(docId)
         .set({'value': currentCounter});
